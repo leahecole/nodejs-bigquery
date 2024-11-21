@@ -139,3 +139,23 @@ export {
   TableSchema,
   ViewDefinition,
 } from './table';
+
+import * as v2 from './v2';
+const DatasetServiceClient = v2.DatasetServiceClient;
+type DatasetServiceClient = v2.DatasetServiceClient;
+const JobServiceClient = v2.JobServiceClient;
+type JobServiceClient = v2.JobServiceClient;
+const ModelServiceClient = v2.ModelServiceClient;
+type ModelServiceClient = v2.ModelServiceClient;
+const ProjectServiceClient = v2.ProjectServiceClient;
+type ProjectServiceClient = v2.ProjectServiceClient;
+const RoutineServiceClient = v2.RoutineServiceClient;
+type RoutineServiceClient = v2.RoutineServiceClient;
+const RowAccessPolicyServiceClient = v2.RowAccessPolicyServiceClient;
+type RowAccessPolicyServiceClient = v2.RowAccessPolicyServiceClient;
+const TableServiceClient = v2.TableServiceClient;
+type TableServiceClient = v2.TableServiceClient;
+export {v2, DatasetServiceClient, JobServiceClient, ModelServiceClient, ProjectServiceClient, RoutineServiceClient, RowAccessPolicyServiceClient, TableServiceClient};
+export default {v2, DatasetServiceClient, JobServiceClient, ModelServiceClient, ProjectServiceClient, RoutineServiceClient, RowAccessPolicyServiceClient, TableServiceClient};
+import * as protos from '../protos/protos';
+export {protos}

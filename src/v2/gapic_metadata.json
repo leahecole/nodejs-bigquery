@@ -1,0 +1,431 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.bigquery.v2",
+  "libraryPackage": "@google-cloud/bigquery",
+  "services": {
+    "DatasetService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "DatasetServiceClient",
+          "rpcs": {
+            "GetDataset": {
+              "methods": [
+                "getDataset"
+              ]
+            },
+            "InsertDataset": {
+              "methods": [
+                "insertDataset"
+              ]
+            },
+            "PatchDataset": {
+              "methods": [
+                "patchDataset"
+              ]
+            },
+            "UpdateDataset": {
+              "methods": [
+                "updateDataset"
+              ]
+            },
+            "DeleteDataset": {
+              "methods": [
+                "deleteDataset"
+              ]
+            },
+            "ListDatasets": {
+              "methods": [
+                "listDatasets"
+              ]
+            },
+            "UndeleteDataset": {
+              "methods": [
+                "undeleteDataset"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "DatasetServiceClient",
+          "rpcs": {
+            "GetDataset": {
+              "methods": [
+                "getDataset"
+              ]
+            },
+            "InsertDataset": {
+              "methods": [
+                "insertDataset"
+              ]
+            },
+            "PatchDataset": {
+              "methods": [
+                "patchDataset"
+              ]
+            },
+            "UpdateDataset": {
+              "methods": [
+                "updateDataset"
+              ]
+            },
+            "DeleteDataset": {
+              "methods": [
+                "deleteDataset"
+              ]
+            },
+            "ListDatasets": {
+              "methods": [
+                "listDatasets"
+              ]
+            },
+            "UndeleteDataset": {
+              "methods": [
+                "undeleteDataset"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "JobService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "JobServiceClient",
+          "rpcs": {
+            "CancelJob": {
+              "methods": [
+                "cancelJob"
+              ]
+            },
+            "GetJob": {
+              "methods": [
+                "getJob"
+              ]
+            },
+            "InsertJob": {
+              "methods": [
+                "insertJob"
+              ]
+            },
+            "DeleteJob": {
+              "methods": [
+                "deleteJob"
+              ]
+            },
+            "ListJobs": {
+              "methods": [
+                "listJobs"
+              ]
+            },
+            "GetQueryResults": {
+              "methods": [
+                "getQueryResults"
+              ]
+            },
+            "Query": {
+              "methods": [
+                "query"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "JobServiceClient",
+          "rpcs": {
+            "CancelJob": {
+              "methods": [
+                "cancelJob"
+              ]
+            },
+            "GetJob": {
+              "methods": [
+                "getJob"
+              ]
+            },
+            "InsertJob": {
+              "methods": [
+                "insertJob"
+              ]
+            },
+            "DeleteJob": {
+              "methods": [
+                "deleteJob"
+              ]
+            },
+            "ListJobs": {
+              "methods": [
+                "listJobs"
+              ]
+            },
+            "GetQueryResults": {
+              "methods": [
+                "getQueryResults"
+              ]
+            },
+            "Query": {
+              "methods": [
+                "query"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ModelService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ModelServiceClient",
+          "rpcs": {
+            "GetModel": {
+              "methods": [
+                "getModel"
+              ]
+            },
+            "ListModels": {
+              "methods": [
+                "listModels"
+              ]
+            },
+            "PatchModel": {
+              "methods": [
+                "patchModel"
+              ]
+            },
+            "DeleteModel": {
+              "methods": [
+                "deleteModel"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ModelServiceClient",
+          "rpcs": {
+            "GetModel": {
+              "methods": [
+                "getModel"
+              ]
+            },
+            "ListModels": {
+              "methods": [
+                "listModels"
+              ]
+            },
+            "PatchModel": {
+              "methods": [
+                "patchModel"
+              ]
+            },
+            "DeleteModel": {
+              "methods": [
+                "deleteModel"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ProjectService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ProjectServiceClient",
+          "rpcs": {
+            "GetServiceAccount": {
+              "methods": [
+                "getServiceAccount"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ProjectServiceClient",
+          "rpcs": {
+            "GetServiceAccount": {
+              "methods": [
+                "getServiceAccount"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "RoutineService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "RoutineServiceClient",
+          "rpcs": {
+            "GetRoutine": {
+              "methods": [
+                "getRoutine"
+              ]
+            },
+            "InsertRoutine": {
+              "methods": [
+                "insertRoutine"
+              ]
+            },
+            "UpdateRoutine": {
+              "methods": [
+                "updateRoutine"
+              ]
+            },
+            "PatchRoutine": {
+              "methods": [
+                "patchRoutine"
+              ]
+            },
+            "DeleteRoutine": {
+              "methods": [
+                "deleteRoutine"
+              ]
+            },
+            "ListRoutines": {
+              "methods": [
+                "listRoutines"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "RoutineServiceClient",
+          "rpcs": {
+            "GetRoutine": {
+              "methods": [
+                "getRoutine"
+              ]
+            },
+            "InsertRoutine": {
+              "methods": [
+                "insertRoutine"
+              ]
+            },
+            "UpdateRoutine": {
+              "methods": [
+                "updateRoutine"
+              ]
+            },
+            "PatchRoutine": {
+              "methods": [
+                "patchRoutine"
+              ]
+            },
+            "DeleteRoutine": {
+              "methods": [
+                "deleteRoutine"
+              ]
+            },
+            "ListRoutines": {
+              "methods": [
+                "listRoutines"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "RowAccessPolicyService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "RowAccessPolicyServiceClient",
+          "rpcs": {
+            "ListRowAccessPolicies": {
+              "methods": [
+                "listRowAccessPolicies",
+                "listRowAccessPoliciesStream",
+                "listRowAccessPoliciesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "RowAccessPolicyServiceClient",
+          "rpcs": {
+            "ListRowAccessPolicies": {
+              "methods": [
+                "listRowAccessPolicies",
+                "listRowAccessPoliciesStream",
+                "listRowAccessPoliciesAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "TableService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "TableServiceClient",
+          "rpcs": {
+            "GetTable": {
+              "methods": [
+                "getTable"
+              ]
+            },
+            "InsertTable": {
+              "methods": [
+                "insertTable"
+              ]
+            },
+            "PatchTable": {
+              "methods": [
+                "patchTable"
+              ]
+            },
+            "UpdateTable": {
+              "methods": [
+                "updateTable"
+              ]
+            },
+            "DeleteTable": {
+              "methods": [
+                "deleteTable"
+              ]
+            },
+            "ListTables": {
+              "methods": [
+                "listTables"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "TableServiceClient",
+          "rpcs": {
+            "GetTable": {
+              "methods": [
+                "getTable"
+              ]
+            },
+            "InsertTable": {
+              "methods": [
+                "insertTable"
+              ]
+            },
+            "PatchTable": {
+              "methods": [
+                "patchTable"
+              ]
+            },
+            "UpdateTable": {
+              "methods": [
+                "updateTable"
+              ]
+            },
+            "DeleteTable": {
+              "methods": [
+                "deleteTable"
+              ]
+            },
+            "ListTables": {
+              "methods": [
+                "listTables"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

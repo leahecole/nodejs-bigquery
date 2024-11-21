@@ -12,7 +12,8 @@
   "types": "./build/src/index.d.ts",
   "files": [
     "build/src",
-    "!build/src/**/*.map"
+    "!build/src/**/*.map",
+    "build/protos"
   ],
   "keywords": [
     "google apis client",
@@ -33,13 +34,15 @@
     "lint": "gts check",
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
     "test": "c8 mocha build/test",
-    "system-test": "mocha build/system-test --timeout 600000",
+    "system-test": "c8 mocha build/system-test --timeout 600000",
     "presystem-test": "npm run compile",
     "clean": "gts clean",
-    "compile": "tsc -p . && cp src/types.d.ts build/src/",
+    "compile": "tsc -p . && cp src/types.d.ts build/src/ && cp -r protos build/ && minifyProtoJson",
+    "compile-protos": "compileProtos src",
+
     "fix": "gts fix",
     "predocs": "npm run compile",
-    "prepare": "npm run compile",
+    "prepare": "npm run compile-protos && npm run compile",
     "pretest": "npm run compile",
     "docs-test": "linkinator docs",
     "predocs-test": "npm run docs",
@@ -52,6 +55,8 @@
     "@google-cloud/paginator": "^5.0.2",
     "@google-cloud/precise-date": "^4.0.0",
     "@google-cloud/promisify": "^4.0.0",
+    "google-gax": "^4.3.4",
+
     "arrify": "^2.0.1",
     "big.js": "^6.0.0",
     "duplexify": "^4.0.0",
@@ -86,6 +91,8 @@
     "sinon": "^18.0.0",
     "nise": "6.0.0",
     "path-to-regexp": "6.3.0",
-    "typescript": "^5.1.6"
+    "typescript": "^5.1.6",
+    "gapic-tools": "^0.4.2"
+
   }
 }
