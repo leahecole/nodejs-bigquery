@@ -14,6 +14,7 @@
 //  * limitations under the License.
 //  */
 
+import { DatasetServiceClient, protos } from ".";
 // import {
 //   DecorateRequestOptions,
 //   DeleteCallback,
@@ -100,6 +101,71 @@
 
 // export type TableResponse = [Table, bigquery.ITable];
 // export type TableCallback = ResourceCallback<Table, bigquery.ITable>;
+
+export class Dataset {
+    datasetClient: DatasetServiceClient; 
+    id: string;
+    dataset: protos.google.cloud.bigquery.v2.Dataset;
+    constructor(id: string, datasetClient: DatasetServiceClient){
+        this.datasetClient = datasetClient;
+        this.id = id;
+        this.dataset = new protos.google.cloud.bigquery.v2.Dataset({id});
+
+    }
+
+
+    // TODO parameters
+    get(){
+        const projectId = "leah-playground"; // TODO 
+        const datasetId = this.id
+        const request = {
+          projectId,
+          datasetId
+        }
+        return this.datasetClient.getDataset(request);
+
+    }
+
+    getMetadata(){
+        const projectId = "leah-playground"; // TODO 
+        const datasetId = this.id
+        const request = {
+          projectId,
+          datasetId
+        }
+        throw new Error("corndogs" + JSON.stringify(this.datasetClient.getDataset(request)))
+        // return this.datasetClient.getMetadata(request);
+
+    }
+    //TODO fill in
+    delete(force: boolean){
+        // TODO force boolean
+    const projectId = "leah-playground"; // TODO 
+    const datasetId = this.id;
+    const request = {
+        projectId,
+        datasetId
+    }
+    try{
+        console.log('attempting delete!?!')
+        const response = this.datasetClient.deleteDataset(request);
+        return response
+    }catch(e:any){
+        console.log('in catch', e)
+        if(e.message && e.message === "Received null response from RPC DeleteDataset"){
+            console.log("shit")
+            return null // TODO what to return?
+  
+          }
+          else{
+            console.log('in else')
+            throw e
+          }
+    }
+
+    }
+
+}
 
 // /**
 //  * Interact with your BigQuery dataset. Create a Dataset instance with

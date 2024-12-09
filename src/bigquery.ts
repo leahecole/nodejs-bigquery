@@ -14,6 +14,8 @@
 //  * limitations under the License.
 //  */
 
+import { DatasetServiceClient, protos} from ".";
+import {Dataset} from "./dataset"
 // import {
 //   ApiError,
 //   Service,
@@ -309,6 +311,48 @@
 //  *     `https://www.googleapis.com/auth/drive.readonly` scope.
 //  */
 
+// This experiment keeps a catchall BigQuery Class
+// and initializes clients as needed
+export class BigQuery {
+    // TODO (coleleah) - bring over values from previous constructor
+    // map them to creating each client
+    datasetClient: DatasetServiceClient; 
+
+    // TODO typing for options
+    constructor(options: any){
+      this.datasetClient = options?.datasetClient ?? new DatasetServiceClient();
+    }
+
+    // TODO: parameters
+    dataset(id: string){
+      return new Dataset(id, this.datasetClient);
+
+    }
+    // TODO fill in
+    getDatasets(){
+      const projectId = "leah-playground"; // TODO 
+      const request = {
+          projectId
+      }
+      return this.datasetClient.listDatasets(request)
+
+  }
+    // TODO parameters
+    createDataset(datasetId: string){
+      const projectId = "leah-playground"; // TODO 
+      const dataset = {
+        datasetReference: {datasetId: datasetId}
+      }
+      const request = {
+        projectId,
+        dataset
+      }
+      return this.datasetClient.insertDataset(request)
+    }
+
+
+
+}
 // /**
 //  * In the following examples from this page and the other modules (`Dataset`,
 //  * `Table`, etc.), we are going to be using a dataset from

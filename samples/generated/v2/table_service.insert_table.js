@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main(projectId, datasetId, table) {
+function main() {
   // [START bigquery_v2_generated_TableService_InsertTable_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -31,15 +31,15 @@ function main(projectId, datasetId, table) {
   /**
    *  Required. Project ID of the new table
    */
-  // const projectId = 'abc123'
+  const projectId = 'leah-playground'
   /**
    *  Required. Dataset ID of the new table
    */
-  // const datasetId = 'abc123'
+  const datasetId = 'leah_playground1125'
   /**
    *  Required. A tables resource to insert
    */
-  // const table = {}
+  const table = {tableReference: {tableId:"test-table1"}}
 
   // Imports the Bigquery library
   const {TableServiceClient} = require('@google-cloud/bigquery').v2;

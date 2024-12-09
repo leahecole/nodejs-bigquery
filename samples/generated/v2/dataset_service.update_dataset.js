@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main(projectId, datasetId, dataset) {
+function main() {
   // [START bigquery_v2_generated_DatasetService_UpdateDataset_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -31,16 +31,16 @@ function main(projectId, datasetId, dataset) {
   /**
    *  Required. Project ID of the dataset being updated
    */
-  // const projectId = 'abc123'
+  const projectId = 'leah-playground'
   /**
    *  Required. Dataset ID of the dataset being updated
    */
-  // const datasetId = 'abc123'
+  const datasetId = 'leah_playground1125'
   /**
    *  Required. Datasets resource which will replace or patch the specified
    *  dataset.
    */
-  // const dataset = {}
+  const dataset = {description: {value: "oneplatform yay"}}
 
   // Imports the Bigquery library
   const {DatasetServiceClient} = require('@google-cloud/bigquery').v2;
@@ -62,6 +62,7 @@ function main(projectId, datasetId, dataset) {
   }
 
   callUpdateDataset();
+
   // [END bigquery_v2_generated_DatasetService_UpdateDataset_async]
 }
 

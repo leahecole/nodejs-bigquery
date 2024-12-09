@@ -20,7 +20,9 @@
 
 'use strict';
 
-function main(projectId, dataset) {
+// function main(projectId, dataset) {
+  function main() {
+
   // [START bigquery_v2_generated_DatasetService_InsertDataset_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -31,11 +33,12 @@ function main(projectId, dataset) {
   /**
    *  Required. Project ID of the new dataset
    */
-  // const projectId = 'abc123'
+  const projectId = 'leah-playground'
   /**
    *  Required. Datasets resource to use for the new dataset
    */
-  // const dataset = {}
+  const dataset = {datasetReference: {datasetId: "leah_playground1125"}}
+  const location = "US"
 
   // Imports the Bigquery library
   const {DatasetServiceClient} = require('@google-cloud/bigquery').v2;
@@ -48,6 +51,7 @@ function main(projectId, dataset) {
     const request = {
       projectId,
       dataset,
+      location
     };
 
     // Run request

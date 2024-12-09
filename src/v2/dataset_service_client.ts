@@ -708,7 +708,13 @@ export class DatasetServiceClient {
       'dataset_id': request.datasetId ?? '',
     });
     this.initialize();
-    return this.innerApiCalls.deleteDataset(request, options, callback);
+    try{
+      console.log('trying')
+      return this.innerApiCalls.deleteDataset(request, options, callback);
+    }catch(e){
+      console.log('oh no')
+      console.log(e)
+    }
   }
 /**
  * Lists all datasets in the specified project to which the user has been

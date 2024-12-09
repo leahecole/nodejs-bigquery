@@ -29,7 +29,7 @@ const datasetId = `${GCLOUD_TESTS_PREFIX}_datasets_${uuid.v4()}`.replace(
 
 const bigquery = new BigQuery();
 
-describe('Datasets', () => {
+describe.only('Datasets', () => {
   before(async () => {
     // Delete any stale datasets from samples tests
     await deleteDatasets();
@@ -43,7 +43,7 @@ describe('Datasets', () => {
     await bigquery.dataset(datasetId).delete({force: true}).catch(console.warn);
   });
 
-  it('should create a dataset', async () => {
+  it.only('should create a dataset', async () => {
     const output = execSync(`node createDataset.js ${datasetId}`);
     assert.include(output, `Dataset ${datasetId} created.`);
     const [exists] = await bigquery.dataset(datasetId).exists();
@@ -108,7 +108,7 @@ describe('Datasets', () => {
     assert.match(output, new RegExp('usa_names'));
   });
 
-  it('should retrieve a dataset if it exists', async () => {
+  it.only('should retrieve a dataset if it exists', async () => {
     const output = execSync(`node getDataset.js ${datasetId}`);
     assert.include(output, 'Dataset:');
     assert.include(output, datasetId);
@@ -175,14 +175,17 @@ describe('Datasets', () => {
   }
 
   async function deleteDatasets() {
-    let [datasets] = await bigquery.getDatasets();
-    datasets = datasets.filter(dataset =>
+    let [datasets]  = await bigquery.getDatasets();
+    // TODO (coleleah) - can the code in bigquery.ts be moidfied?
+      datasets = datasets.datasets.filter(dataset =>
       dataset.id.includes(GCLOUD_TESTS_PREFIX)
     );
 
     for (const dataset of datasets) {
       let metadata;
       try {
+        console.log(JSON.stringify(dataset) + "!!!!!!!!!!!!!!!");
+        console.log(bigquery.dataset.getMetadata())
         [metadata] = await dataset.getMetadata();
       } catch (e) {
         console.log(`dataset(${dataset.id}).getMetadata() failed`);

@@ -41,7 +41,7 @@ function main(projectId, datasetId) {
    *  If False and the dataset contains tables, the request will fail.
    *  Default is False
    */
-  // const deleteContents = true
+  const deleteContents = true
 
   // Imports the Bigquery library
   const {DatasetServiceClient} = require('@google-cloud/bigquery').v2;
@@ -54,10 +54,12 @@ function main(projectId, datasetId) {
     const request = {
       projectId,
       datasetId,
+      deleteContents,
     };
 
     // Run request
     const response = await bigqueryClient.deleteDataset(request);
+    console.log('before response')
     console.log(response);
   }
 

@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main(projectId, datasetId, tableId) {
+function main() {
   // [START bigquery_v2_generated_TableService_DeleteTable_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -31,15 +31,15 @@ function main(projectId, datasetId, tableId) {
   /**
    *  Required. Project ID of the table to delete
    */
-  // const projectId = 'abc123'
+  const projectId = 'leah-playground'
   /**
    *  Required. Dataset ID of the table to delete
    */
-  // const datasetId = 'abc123'
+  const datasetId = 'leah_playground1125'
   /**
    *  Required. Table ID of the table to delete
    */
-  // const tableId = 'abc123'
+  const tableId = 'test-table1'
 
   // Imports the Bigquery library
   const {TableServiceClient} = require('@google-cloud/bigquery').v2;

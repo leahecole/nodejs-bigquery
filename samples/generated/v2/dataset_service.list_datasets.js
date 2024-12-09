@@ -71,7 +71,7 @@ function main(projectId) {
 
     // Run request
     const response = await bigqueryClient.listDatasets(request);
-    console.log(response);
+    console.log(response[0].datasets[0].id);
   }
 
   callListDatasets();

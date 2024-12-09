@@ -14,8 +14,8 @@
 //  * limitations under the License.
 //  */
 
-// export {
-//   BigQuery,
+export {
+  BigQuery,
 //   BigQueryDate,
 //   BigQueryDateOptions,
 //   BigQueryDatetime,
@@ -57,7 +57,7 @@
 //   SimpleQueryRowsCallback,
 //   SimpleQueryRowsResponse,
 //   ValueType,
-// } from './bigquery';
+} from './bigquery';
 
 // export {
 //   CreateDatasetOptions,

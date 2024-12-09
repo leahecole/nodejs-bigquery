@@ -31,8 +31,9 @@ function main(datasetId = 'my_dataset') {
     // Retrieve dataset reference
     const [dataset] = await bigquery.dataset(datasetId).get();
 
-    console.log('Dataset:');
-    console.log(dataset.metadata.datasetReference);
+    console.log('Dataset:', dataset);
+
+    // console.log(dataset.metadata.datasetReference);
   }
   getDataset();
   // [END bigquery_get_dataset]

@@ -14,7 +14,7 @@
 
 'use strict';
 
-function main(datasetId = 'my_dataset') {
+function main(datasetId = 'leah_playground1125') {
   // [START bigquery_update_dataset_description]
   // Import the Google Cloud client library
   const {BigQuery} = require('@google-cloud/bigquery');
