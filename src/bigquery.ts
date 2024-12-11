@@ -14,8 +14,8 @@
 //  * limitations under the License.
 //  */
 
-import { DatasetServiceClient, protos} from ".";
-import {Dataset} from "./dataset"
+import { DatasetServiceClient, protos, TableServiceClient} from ".";
+// import {Dataset} from "./dataset"
 // import {
 //   ApiError,
 //   Service,
@@ -313,46 +313,79 @@ import {Dataset} from "./dataset"
 
 // This experiment keeps a catchall BigQuery Class
 // and initializes clients as needed
-export class BigQuery {
-    // TODO (coleleah) - bring over values from previous constructor
-    // map them to creating each client
+// export class BigQueryClass{
+//     // TODO (coleleah) - bring over values from previous constructor
+//     // map them to creating each client
+//     datasetClient: DatasetServiceClient; 
+//     tableClient: TableServiceClient;
+
+//     // TODO typing for options
+//     constructor(options: any){
+//       this.datasetClient = options?.datasetClient ?? new DatasetServiceClient();
+//       this.tableClient = options?.tableClient ?? new TableServiceClient();
+//     }
+
+//   //   // TODO: parameters
+//   //   dataset(id: string){
+//   //     return new Dataset(id, this.datasetClient);
+
+//   //   }
+//   //   // TODO fill in
+//   //   getDatasets(){
+//   //     const projectId = "leah-playground"; // TODO 
+//   //     const request = {
+//   //         projectId
+//   //     }
+//   //     return this.datasetClient.listDatasets(request)
+
+//   // }
+//   //   // TODO parameters
+//   //   createDataset(datasetId: string){
+//   //     const projectId = "leah-playground"; // TODO 
+//   //     const dataset = {
+//   //       datasetReference: {datasetId: datasetId}
+//   //     }
+//   //     const request = {
+//   //       projectId,
+//   //       dataset
+//   //     }
+//   //     return this.datasetClient.insertDataset(request)
+//   //   }
+
+
+
+// }
+export class BigQueryClient{
+      // map them to creating each client
     datasetClient: DatasetServiceClient; 
+    tableClient: TableServiceClient;
 
     // TODO typing for options
     constructor(options: any){
       this.datasetClient = options?.datasetClient ?? new DatasetServiceClient();
+      this.tableClient = options?.tableClient ?? new TableServiceClient();
+      const subclients = [DatasetServiceClient,TableServiceClient]
+      // build the methods for the bigquery client from the methods of subclients
+      // derived from https://www.typescriptlang.org/docs/handbook/mixins.html#alternative-pattern
+      // TODO - explore some kind of mapping
+      subclients.forEach((subclient)=>{
+        Object.getOwnPropertyNames(subclient.prototype).forEach((name) => {
+          Object.defineProperty(
+            BigQueryClient.prototype,
+            name,
+            Object.getOwnPropertyDescriptor(subclient.prototype, name) ||
+              Object.create(null)
+          );
+        });
+      })
+      console.log(Object.getOwnPropertyDescriptor(BigQueryClient.prototype, 'insertDataset'))
     }
-
-    // TODO: parameters
-    dataset(id: string){
-      return new Dataset(id, this.datasetClient);
-
-    }
-    // TODO fill in
-    getDatasets(){
-      const projectId = "leah-playground"; // TODO 
-      const request = {
-          projectId
-      }
-      return this.datasetClient.listDatasets(request)
-
-  }
-    // TODO parameters
-    createDataset(datasetId: string){
-      const projectId = "leah-playground"; // TODO 
-      const dataset = {
-        datasetReference: {datasetId: datasetId}
-      }
-      const request = {
-        projectId,
-        dataset
-      }
-      return this.datasetClient.insertDataset(request)
-    }
-
-
-
 }
+
+
+
+// TODO(coleleah): overload delete dataset
+
 // /**
 //  * In the following examples from this page and the other modules (`Dataset`,
 //  * `Table`, etc.), we are going to be using a dataset from

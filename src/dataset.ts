@@ -102,7 +102,7 @@ import { DatasetServiceClient, protos } from ".";
 // export type TableResponse = [Table, bigquery.ITable];
 // export type TableCallback = ResourceCallback<Table, bigquery.ITable>;
 
-export class Dataset {
+export class DatasetHandwritten {
     datasetClient: DatasetServiceClient; 
     id: string;
     dataset: protos.google.cloud.bigquery.v2.Dataset;
@@ -138,7 +138,7 @@ export class Dataset {
 
     }
     //TODO fill in
-    delete(force: boolean){
+    async delete(force: boolean){
         // TODO force boolean
     const projectId = "leah-playground"; // TODO 
     const datasetId = this.id;
@@ -148,12 +148,12 @@ export class Dataset {
     }
     try{
         console.log('attempting delete!?!')
-        const response = this.datasetClient.deleteDataset(request);
+        const response = await this.datasetClient.deleteDataset(request);
         return response
     }catch(e:any){
         console.log('in catch', e)
         if(e.message && e.message === "Received null response from RPC DeleteDataset"){
-            console.log("shit")
+            console.log("oh yikes")
             return null // TODO what to return?
   
           }

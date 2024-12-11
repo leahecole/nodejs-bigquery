@@ -15,7 +15,7 @@
 //  */
 
 export {
-  BigQuery,
+  BigQueryClient,
 //   BigQueryDate,
 //   BigQueryDateOptions,
 //   BigQueryDatetime,
