@@ -22,6 +22,97 @@ let output = `
 //  * limitations under the License.
 //  */
 `
+let foundNodes = []
+function extract(node: ts.Node, depth = 0): void {
+  // Create a Program to represent the project, then pull out the
+  // source file to parse its AST.
+
+  function getKind(node: ts.Node) {
+    return ts.SyntaxKind[node.kind]
+  }
+  const thingsWeCareAbout = ["MethodDeclaration"]
+  const kind = getKind(node)
+  if(thingsWeCareAbout.includes(kind)){
+
+    if(ts.isMethodDeclaration(node)){
+      // this typecasting has to be done because the name of a MethodDeclaration
+      // can be one of a few different types but in our use case we know it's an identifier
+      // and can therefore safely make this assumption to get the human readable name
+      const name = node.name as ts.Identifier;
+      const nameEscapedText = name.escapedText as string;
+
+        // TODO update to be modular
+      if(node.body && nameEscapedText.search("Dataset")>0){ // not an overload, has an actual function body
+        
+          // type is the node.type and we can deal with union types later
+          foundNodes.push([node.name, node])
+
+      }
+
+
+    }
+
+
+  }
+  // Loop through the root AST nodes of the file
+  ts.forEachChild(node, childNode => {
+    extract(childNode, depth +1)
+  });
+
+
+}
+
+function ast() {
+    const file = '../src/v2/dataset_service_client.ts'
+    let program = ts.createProgram([file], { allowJs: true });
+    const sourceFile = program.getSourceFile(file);
+
+    // To print the AST, we'll use TypeScript's printer
+    const printer = ts.createPrinter({ newLine: ts.NewLineKind.LineFeed });
+
+    // Run the extract function with the script's arguments
+    extract(sourceFile!);
+  // Either print the found nodes, or offer a list of what identifiers were found
+  let output = ''
+  const checker = program.getTypeChecker();
+  
+  foundNodes.map(f => {
+    const [name, node] = f;
+    // create function name
+    const functionName = `${name.escapedText}`
+
+    // TODO - go through clients
+    output = output.concat(`\n\t${functionName}(`)
+    // add parameters
+    let parametersList = ``
+    for (let i=0; i<node.parameters.length; i++){
+        const name = node.parameters[i].name.escapedText
+        const typeNode = checker.getTypeFromTypeNode(node.parameters[i].type)
+        // probably need to use some version of fully qualified name to get full path
+        // like using getFullyQualifiedName on the symbol, or something
+        const typeString = checker.typeToString(typeNode)
+        let parameter = `${name}: ${typeString}`
+        parametersList = parametersList.concat(name)
+        if (i!==node.parameters.length-1){
+            parameter += ", "
+            parametersList += ", "
+        }
+        output = output.concat(`\n\t\t${parameter}`)        
+    }
+    output = output.concat(`)`)
+    // add return type
+    const typeNode = checker.getTypeFromTypeNode(node.type)
+    // probably need to use some version of fully qualified name to get full path
+    // like using getFullyQualifiedName on the symbol, or something
+    const returnType = checker.typeToString(typeNode)
+    output = output.concat(`:${returnType}{`)
+    // call underlying client function
+    // TODO make dynamic
+    output = output.concat(`\n\t\tthis.datasetClient.${functionName}(${parametersList})\n\t}`)
+    });
+    return output
+
+}
 
 
 function makeImports(clients){
@@ -55,37 +146,17 @@ function buildClientConstructor(clients){
     }
     constructorInitializers = constructorInitializers.concat('\t}')
     let output = `export class BigQueryClient{\n`
-    output = output.concat(variableDecl, "\n", constructorInitializers, "\n}")
+    output = output.concat(variableDecl, "\n", constructorInitializers)
     return output  
 }
 
-function surfaceMethods(clients){
-    let output = `\n`
-    clients.forEach((client) =>{
-        // TODO get the dynamic import working
-        // const statement = eval(`const {${client}} = require(\"@google-cloud/bigquery\");`)
-        const clientVar = eval(client)
-        const methodSuffix = client.split('ServiceClient')[0]
-        Object.getOwnPropertyNames(clientVar.prototype).forEach((name) => {
-            // possible TODO - change to denylist
-            // one of the crud methods
-            if(name.search(methodSuffix)>0){
-                // TODO - parameters wrt multiple overloads
-                console.log(Object.getOwnPropertyDescriptor(clientVar.prototype, name)?.value)
-
-
-            }
-
-        })
-    } )
-
-}
 
 function buildOutput(){
     let newoutput;
     newoutput = output.concat(makeImports(clients))
     newoutput = newoutput.concat(buildClientConstructor(clients))
-    surfaceMethods(clients)
+    newoutput = newoutput.concat(ast())
+    newoutput = newoutput.concat("\n}")
     return newoutput
 
 }
@@ -98,57 +169,3 @@ fs.writeFile('../src/bigquery.ts', finaloutput, (err) => {
 });
 
 
-let foundNodes = []
-function extract(node: ts.Node, depth = 0): void {
-  // Create a Program to represent the project, then pull out the
-  // source file to parse its AST.
-
-  function getKind(node: ts.Node) {
-    return ts.SyntaxKind[node.kind]
-  }
-  const thingsWeCareAbout = ["ClassDeclaration", "InterfaceDeclaration", "TypeAliasDeclaration", "MethodDeclaration", "MethodSignature" ]
-  const kind = getKind(node)
-
-  if(thingsWeCareAbout.includes(kind)){
-    if(ts.isInterfaceDeclaration(node) || ts.isClassDeclaration(node) || ts.isTypeAliasDeclaration(node)){
-      console.log(kind + "," + 
-        node.name?.escapedText)
-    }
-    if(ts.isMethodDeclaration(node)){
-      // this typecasting has to be done because the name of a MethodDeclaration
-      // can be one of a few different types but in our use case we know it's an identifier
-      // and can therefore safely make this assumption to get the human readable name
-      const name = node.name as ts.Identifier;
-      if(node.body){ // not an overload, has an actual function body
-          console.log( kind+ "," + name.escapedText)
-          foundNodes.push([node.name, node])
-
-      }
-
-
-    }
-
-
-  }
-  // Loop through the root AST nodes of the file
-  ts.forEachChild(node, childNode => {
-    extract(childNode, depth +1)
-  });
-
-
-}
-const file = '../src/v2/dataset_service_client.ts'
-let program = ts.createProgram([file], { allowJs: true });
-const sourceFile = program.getSourceFile(file);
-
-// To print the AST, we'll use TypeScript's printer
-const printer = ts.createPrinter({ newLine: ts.NewLineKind.LineFeed });
-
-// Run the extract function with the script's arguments
-extract(sourceFile!);
-  // Either print the found nodes, or offer a list of what identifiers were found
-foundNodes.map(f => {
-const [name, node] = f;
-console.log("### " + name.escapedText + "\n");
-console.log(printer.printNode(ts.EmitHint.Unspecified, node, sourceFile)) + "\n";
-});
