@@ -3,6 +3,7 @@ import * as ts from "typescript";
 const fs = require('fs')
 // TODO: maintainer - if a new client is added, add it to this list
 const clients = ["DatasetServiceClient", "TableServiceClient"]
+const files = ["../src/v2/dataset_service_client.ts", "../src/v2/table_service_client.ts"]
 // TODO: automate construction of methods list
 const {DatasetServiceClient, TableServiceClient} = require("@google-cloud/bigquery")
 let output = `
@@ -23,7 +24,7 @@ let output = `
 //  */
 `
 let foundNodes = []
-function extract(node: ts.Node, depth = 0): void {
+function extract(node: ts.Node, depth = 0, client): void {
   // Create a Program to represent the project, then pull out the
   // source file to parse its AST.
 
@@ -41,77 +42,74 @@ function extract(node: ts.Node, depth = 0): void {
       const name = node.name as ts.Identifier;
       const nameEscapedText = name.escapedText as string;
 
-        // TODO update to be modular
-      if(node.body && nameEscapedText.search("Dataset")>0){ // not an overload, has an actual function body
+      // TODO deal with overloads properly 
+      if(node.body && nameEscapedText.search(client)>0){ // crud operations of
         
           // type is the node.type and we can deal with union types later
           foundNodes.push([node.name, node])
-
       }
-
-
     }
-
-
   }
   // Loop through the root AST nodes of the file
   ts.forEachChild(node, childNode => {
-    extract(childNode, depth +1)
+    extract(childNode, depth +1, client)
   });
 
 
 }
 
-function ast() {
-    const file = '../src/v2/dataset_service_client.ts'
-    let program = ts.createProgram([file], { allowJs: true });
-    const sourceFile = program.getSourceFile(file);
+function ast(file, client) {
+    let output = ''
+        let program = ts.createProgram([file], { allowJs: true });
+        const sourceFile = program.getSourceFile(file);
 
-    // To print the AST, we'll use TypeScript's printer
-    const printer = ts.createPrinter({ newLine: ts.NewLineKind.LineFeed });
+        // Run the extract function with the script's arguments
+        extract(sourceFile!, undefined, client);
+    // Either print the found nodes, or offer a list of what identifiers were found
+    const checker = program.getTypeChecker();
+    
+    foundNodes.map(f => {
+        const [name, node] = f;
+        // create function name
+        const functionName = `${name.escapedText}`
 
-    // Run the extract function with the script's arguments
-    extract(sourceFile!);
-  // Either print the found nodes, or offer a list of what identifiers were found
-  let output = ''
-  const checker = program.getTypeChecker();
-  
-  foundNodes.map(f => {
-    const [name, node] = f;
-    // create function name
-    const functionName = `${name.escapedText}`
-
-    // TODO - go through clients
-    output = output.concat(`\n\t${functionName}(`)
-    // add parameters
-    let parametersList = ``
-    for (let i=0; i<node.parameters.length; i++){
-        const name = node.parameters[i].name.escapedText
-        const typeNode = checker.getTypeFromTypeNode(node.parameters[i].type)
-        // probably need to use some version of fully qualified name to get full path
-        // like using getFullyQualifiedName on the symbol, or something
-        const typeString = checker.typeToString(typeNode)
-        let parameter = `${name}: ${typeString}`
-        parametersList = parametersList.concat(name)
-        if (i!==node.parameters.length-1){
-            parameter += ", "
-            parametersList += ", "
+        // TODO - go through clients
+        output = output.concat(`\n\t${functionName}(`)
+        // add parameters
+        let parametersList = ``
+        for (let i=0; i<node.parameters.length; i++){
+            const name = node.parameters[i].name.escapedText
+            const typeString = node.parameters[i].type.getFullText()
+            let parameter = `${name}: ${typeString}`
+            parametersList = parametersList.concat(name)
+            if (i!==node.parameters.length-1){
+                parameter += ", "
+                parametersList += ", "
+            }
+            output = output.concat(`\n\t\t${parameter}`)        
         }
-        output = output.concat(`\n\t\t${parameter}`)        
-    }
-    output = output.concat(`)`)
-    // add return type
-    const typeNode = checker.getTypeFromTypeNode(node.type)
-    // probably need to use some version of fully qualified name to get full path
-    // like using getFullyQualifiedName on the symbol, or something
-    const returnType = checker.typeToString(typeNode)
-    output = output.concat(`:${returnType}{`)
-    // call underlying client function
-    // TODO make dynamic
-    output = output.concat(`\n\t\tthis.datasetClient.${functionName}(${parametersList})\n\t}`)
-    });
+        output = output.concat(`)`)
+        // add return type
+       
+        const returnType = node.type!.getFullText()
+        console.log("return",  returnType)
+        output = output.concat(`:${returnType}{`)
+        // call underlying client function
+        // TODO make dynamic
+        output = output.concat(`\n\t\tthis.${client.toLowerCase()}Client.${functionName}(${parametersList})\n\t}`)
+        });
     return output
 
+}
+
+function astHelper(files, clients){
+    let output = ``
+    for (let f in files){
+        foundNodes = []
+        let client = clients[f].split("Service")[0]
+        output = output.concat(ast(files[f], client))
+    }
+    return output;
 }
 
 
@@ -122,6 +120,8 @@ function makeImports(clients){
     }
 
     imports = imports.concat(`} from ".";\n`)
+    imports = imports.concat(`import {Callback, CallOptions} from "google-gax";\n`)
+
     return imports
 }
 
@@ -155,7 +155,7 @@ function buildOutput(){
     let newoutput;
     newoutput = output.concat(makeImports(clients))
     newoutput = newoutput.concat(buildClientConstructor(clients))
-    newoutput = newoutput.concat(ast())
+    newoutput = newoutput.concat(astHelper(files, clients))
     newoutput = newoutput.concat("\n}")
     return newoutput
 

@@ -15,6 +15,7 @@
 //  * limitations under the License.
 //  */
 import {protos, DatasetServiceClient, TableServiceClient} from ".";
+import {Callback, CallOptions} from "google-gax";
 export class BigQueryClient{
 	datasetClient: DatasetServiceClient;
 	tableClient: TableServiceClient;
@@ -24,45 +25,211 @@ export class BigQueryClient{
 		this.tableClient = options?.tableClient ?? new TableServiceClient();
 	}
 	getDataset(
-		request: IGetDatasetRequest, 
-		optionsOrCallback: CallOptions | Callback<IDataset, IGetDatasetRequest, {}>, 
-		callback: Callback<IDataset, IGetDatasetRequest, {}>):void | Promise<[IDataset, IGetDatasetRequest, {}]>{
+		request:  protos.google.cloud.bigquery.v2.IGetDatasetRequest, 
+		optionsOrCallback:  CallOptions|Callback<
+          protos.google.cloud.bigquery.v2.IDataset,
+          protos.google.cloud.bigquery.v2.IGetDatasetRequest|null|undefined,
+          {}|null|undefined>, 
+		callback:  Callback<
+          protos.google.cloud.bigquery.v2.IDataset,
+          protos.google.cloud.bigquery.v2.IGetDatasetRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.bigquery.v2.IDataset,
+        protos.google.cloud.bigquery.v2.IGetDatasetRequest|undefined, {}|undefined
+      ]>|void{
 		this.datasetClient.getDataset(request, optionsOrCallback, callback)
 	}
 	insertDataset(
-		request: IInsertDatasetRequest, 
-		optionsOrCallback: CallOptions | Callback<IDataset, IInsertDatasetRequest, {}>, 
-		callback: Callback<IDataset, IInsertDatasetRequest, {}>):void | Promise<[IDataset, IInsertDatasetRequest, {}]>{
+		request:  protos.google.cloud.bigquery.v2.IInsertDatasetRequest, 
+		optionsOrCallback:  CallOptions|Callback<
+          protos.google.cloud.bigquery.v2.IDataset,
+          protos.google.cloud.bigquery.v2.IInsertDatasetRequest|null|undefined,
+          {}|null|undefined>, 
+		callback:  Callback<
+          protos.google.cloud.bigquery.v2.IDataset,
+          protos.google.cloud.bigquery.v2.IInsertDatasetRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.bigquery.v2.IDataset,
+        protos.google.cloud.bigquery.v2.IInsertDatasetRequest|undefined, {}|undefined
+      ]>|void{
 		this.datasetClient.insertDataset(request, optionsOrCallback, callback)
 	}
 	patchDataset(
-		request: IUpdateOrPatchDatasetRequest, 
-		optionsOrCallback: CallOptions | Callback<IDataset, IUpdateOrPatchDatasetRequest, {}>, 
-		callback: Callback<IDataset, IUpdateOrPatchDatasetRequest, {}>):void | Promise<[IDataset, IUpdateOrPatchDatasetRequest, {}]>{
+		request:  protos.google.cloud.bigquery.v2.IUpdateOrPatchDatasetRequest, 
+		optionsOrCallback:  CallOptions|Callback<
+          protos.google.cloud.bigquery.v2.IDataset,
+          protos.google.cloud.bigquery.v2.IUpdateOrPatchDatasetRequest|null|undefined,
+          {}|null|undefined>, 
+		callback:  Callback<
+          protos.google.cloud.bigquery.v2.IDataset,
+          protos.google.cloud.bigquery.v2.IUpdateOrPatchDatasetRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.bigquery.v2.IDataset,
+        protos.google.cloud.bigquery.v2.IUpdateOrPatchDatasetRequest|undefined, {}|undefined
+      ]>|void{
 		this.datasetClient.patchDataset(request, optionsOrCallback, callback)
 	}
 	updateDataset(
-		request: IUpdateOrPatchDatasetRequest, 
-		optionsOrCallback: CallOptions | Callback<IDataset, IUpdateOrPatchDatasetRequest, {}>, 
-		callback: Callback<IDataset, IUpdateOrPatchDatasetRequest, {}>):void | Promise<[IDataset, IUpdateOrPatchDatasetRequest, {}]>{
+		request:  protos.google.cloud.bigquery.v2.IUpdateOrPatchDatasetRequest, 
+		optionsOrCallback:  CallOptions|Callback<
+          protos.google.cloud.bigquery.v2.IDataset,
+          protos.google.cloud.bigquery.v2.IUpdateOrPatchDatasetRequest|null|undefined,
+          {}|null|undefined>, 
+		callback:  Callback<
+          protos.google.cloud.bigquery.v2.IDataset,
+          protos.google.cloud.bigquery.v2.IUpdateOrPatchDatasetRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.bigquery.v2.IDataset,
+        protos.google.cloud.bigquery.v2.IUpdateOrPatchDatasetRequest|undefined, {}|undefined
+      ]>|void{
 		this.datasetClient.updateDataset(request, optionsOrCallback, callback)
 	}
 	deleteDataset(
-		request: IDeleteDatasetRequest, 
-		optionsOrCallback: CallOptions | Callback<IEmpty, IDeleteDatasetRequest, {}>, 
-		callback: Callback<IEmpty, IDeleteDatasetRequest, {}>):void | Promise<[IEmpty, IDeleteDatasetRequest, {}]>{
+		request:  protos.google.cloud.bigquery.v2.IDeleteDatasetRequest, 
+		optionsOrCallback:  CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.bigquery.v2.IDeleteDatasetRequest|null|undefined,
+          {}|null|undefined>, 
+		callback:  Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.bigquery.v2.IDeleteDatasetRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.bigquery.v2.IDeleteDatasetRequest|undefined, {}|undefined
+      ]>|void{
 		this.datasetClient.deleteDataset(request, optionsOrCallback, callback)
 	}
 	listDatasets(
-		request: IListDatasetsRequest, 
-		optionsOrCallback: CallOptions | Callback<IDatasetList, IListDatasetsRequest, {}>, 
-		callback: Callback<IDatasetList, IListDatasetsRequest, {}>):void | Promise<[IDatasetList, IListDatasetsRequest, {}]>{
+		request:  protos.google.cloud.bigquery.v2.IListDatasetsRequest, 
+		optionsOrCallback:  CallOptions|Callback<
+          protos.google.cloud.bigquery.v2.IDatasetList,
+          protos.google.cloud.bigquery.v2.IListDatasetsRequest|null|undefined,
+          {}|null|undefined>, 
+		callback:  Callback<
+          protos.google.cloud.bigquery.v2.IDatasetList,
+          protos.google.cloud.bigquery.v2.IListDatasetsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.bigquery.v2.IDatasetList,
+        protos.google.cloud.bigquery.v2.IListDatasetsRequest|undefined, {}|undefined
+      ]>|void{
 		this.datasetClient.listDatasets(request, optionsOrCallback, callback)
 	}
 	undeleteDataset(
-		request: IUndeleteDatasetRequest, 
-		optionsOrCallback: CallOptions | Callback<IDataset, IUndeleteDatasetRequest, {}>, 
-		callback: Callback<IDataset, IUndeleteDatasetRequest, {}>):void | Promise<[IDataset, IUndeleteDatasetRequest, {}]>{
+		request:  protos.google.cloud.bigquery.v2.IUndeleteDatasetRequest, 
+		optionsOrCallback:  CallOptions|Callback<
+          protos.google.cloud.bigquery.v2.IDataset,
+          protos.google.cloud.bigquery.v2.IUndeleteDatasetRequest|null|undefined,
+          {}|null|undefined>, 
+		callback:  Callback<
+          protos.google.cloud.bigquery.v2.IDataset,
+          protos.google.cloud.bigquery.v2.IUndeleteDatasetRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.bigquery.v2.IDataset,
+        protos.google.cloud.bigquery.v2.IUndeleteDatasetRequest|undefined, {}|undefined
+      ]>|void{
 		this.datasetClient.undeleteDataset(request, optionsOrCallback, callback)
+	}
+	getTable(
+		request:  protos.google.cloud.bigquery.v2.IGetTableRequest, 
+		optionsOrCallback:  CallOptions|Callback<
+          protos.google.cloud.bigquery.v2.ITable,
+          protos.google.cloud.bigquery.v2.IGetTableRequest|null|undefined,
+          {}|null|undefined>, 
+		callback:  Callback<
+          protos.google.cloud.bigquery.v2.ITable,
+          protos.google.cloud.bigquery.v2.IGetTableRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.bigquery.v2.ITable,
+        protos.google.cloud.bigquery.v2.IGetTableRequest|undefined, {}|undefined
+      ]>|void{
+		this.tableClient.getTable(request, optionsOrCallback, callback)
+	}
+	insertTable(
+		request:  protos.google.cloud.bigquery.v2.IInsertTableRequest, 
+		optionsOrCallback:  CallOptions|Callback<
+          protos.google.cloud.bigquery.v2.ITable,
+          protos.google.cloud.bigquery.v2.IInsertTableRequest|null|undefined,
+          {}|null|undefined>, 
+		callback:  Callback<
+          protos.google.cloud.bigquery.v2.ITable,
+          protos.google.cloud.bigquery.v2.IInsertTableRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.bigquery.v2.ITable,
+        protos.google.cloud.bigquery.v2.IInsertTableRequest|undefined, {}|undefined
+      ]>|void{
+		this.tableClient.insertTable(request, optionsOrCallback, callback)
+	}
+	patchTable(
+		request:  protos.google.cloud.bigquery.v2.IUpdateOrPatchTableRequest, 
+		optionsOrCallback:  CallOptions|Callback<
+          protos.google.cloud.bigquery.v2.ITable,
+          protos.google.cloud.bigquery.v2.IUpdateOrPatchTableRequest|null|undefined,
+          {}|null|undefined>, 
+		callback:  Callback<
+          protos.google.cloud.bigquery.v2.ITable,
+          protos.google.cloud.bigquery.v2.IUpdateOrPatchTableRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.bigquery.v2.ITable,
+        protos.google.cloud.bigquery.v2.IUpdateOrPatchTableRequest|undefined, {}|undefined
+      ]>|void{
+		this.tableClient.patchTable(request, optionsOrCallback, callback)
+	}
+	updateTable(
+		request:  protos.google.cloud.bigquery.v2.IUpdateOrPatchTableRequest, 
+		optionsOrCallback:  CallOptions|Callback<
+          protos.google.cloud.bigquery.v2.ITable,
+          protos.google.cloud.bigquery.v2.IUpdateOrPatchTableRequest|null|undefined,
+          {}|null|undefined>, 
+		callback:  Callback<
+          protos.google.cloud.bigquery.v2.ITable,
+          protos.google.cloud.bigquery.v2.IUpdateOrPatchTableRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.bigquery.v2.ITable,
+        protos.google.cloud.bigquery.v2.IUpdateOrPatchTableRequest|undefined, {}|undefined
+      ]>|void{
+		this.tableClient.updateTable(request, optionsOrCallback, callback)
+	}
+	deleteTable(
+		request:  protos.google.cloud.bigquery.v2.IDeleteTableRequest, 
+		optionsOrCallback:  CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.bigquery.v2.IDeleteTableRequest|null|undefined,
+          {}|null|undefined>, 
+		callback:  Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.bigquery.v2.IDeleteTableRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.bigquery.v2.IDeleteTableRequest|undefined, {}|undefined
+      ]>|void{
+		this.tableClient.deleteTable(request, optionsOrCallback, callback)
+	}
+	listTables(
+		request:  protos.google.cloud.bigquery.v2.IListTablesRequest, 
+		optionsOrCallback:  CallOptions|Callback<
+          protos.google.cloud.bigquery.v2.ITableList,
+          protos.google.cloud.bigquery.v2.IListTablesRequest|null|undefined,
+          {}|null|undefined>, 
+		callback:  Callback<
+          protos.google.cloud.bigquery.v2.ITableList,
+          protos.google.cloud.bigquery.v2.IListTablesRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.bigquery.v2.ITableList,
+        protos.google.cloud.bigquery.v2.IListTablesRequest|undefined, {}|undefined
+      ]>|void{
+		this.tableClient.listTables(request, optionsOrCallback, callback)
 	}
 }
