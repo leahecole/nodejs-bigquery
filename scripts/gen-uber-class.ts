@@ -42,9 +42,8 @@ function extract(node: ts.Node, depth = 0, client): void {
       const name = node.name as ts.Identifier;
       const nameEscapedText = name.escapedText as string;
 
-      // TODO deal with overloads properly 
-      if(node.body && nameEscapedText.search(client)>0){ // crud operations of
-        
+      // full implementation (not overload) of crud method for client
+      if(node.body && nameEscapedText.search(client)>0){ 
           // type is the node.type and we can deal with union types later
           foundNodes.push([node.name, node])
       }
@@ -73,18 +72,27 @@ function ast(file, client) {
         // create function name
         const functionName = `${name.escapedText}`
 
-        // TODO - go through clients
         output = output.concat(`\n\t${functionName}(`)
         // add parameters
         let parametersList = ``
+        let argumentsList = ``
         for (let i=0; i<node.parameters.length; i++){
             const name = node.parameters[i].name.escapedText
             const typeString = node.parameters[i].type.getFullText()
             let parameter = `${name}: ${typeString}`
             parametersList = parametersList.concat(name)
+            // this has to do with function overloading - we will later surface code
+            // that does type checking for options and callback
+            if(name === "optionsOrCallback"){
+                argumentsList = argumentsList.concat("options")
+            }
+            else{
+                argumentsList = argumentsList.concat(name)
+            }
             if (i!==node.parameters.length-1){
                 parameter += ", "
                 parametersList += ", "
+                argumentsList += ", "
             }
             output = output.concat(`\n\t\t${parameter}`)        
         }
@@ -92,12 +100,25 @@ function ast(file, client) {
         // add return type
        
         const returnType = node.type!.getFullText()
-        console.log("return",  returnType)
-        output = output.concat(`:${returnType}{`)
+        output = output.concat(`:${returnType}`)
         // call underlying client function
-        // TODO make dynamic
-        output = output.concat(`\n\t\tthis.${client.toLowerCase()}Client.${functionName}(${parametersList})\n\t}`)
+        if(node.body){
+            // this logic needs to be surfaced from underlying clients
+            // to make sure our parameters play nicely with underlying overloads
+            // otherwise you will run into issues similar to https://github.com/microsoft/TypeScript/issues/1805
+            const optionsOrCallback = `
+            let options: CallOptions;
+            if (typeof optionsOrCallback === 'function' && callback === undefined) {
+                callback = optionsOrCallback;
+                options = {};
+            }
+            else {
+                options = optionsOrCallback as CallOptions;
+            }`
+            output = output.concat(`{\n${optionsOrCallback}\n\t\tthis.${client.toLowerCase()}Client.${functionName}(${argumentsList})\n\t}`)
+        }
         });
+
     return output
 
 }

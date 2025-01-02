@@ -38,7 +38,16 @@ export class BigQueryClient{
         protos.google.cloud.bigquery.v2.IDataset,
         protos.google.cloud.bigquery.v2.IGetDatasetRequest|undefined, {}|undefined
       ]>|void{
-		this.datasetClient.getDataset(request, optionsOrCallback, callback)
+
+            let options: CallOptions;
+            if (typeof optionsOrCallback === 'function' && callback === undefined) {
+                callback = optionsOrCallback;
+                options = {};
+            }
+            else {
+                options = optionsOrCallback as CallOptions;
+            }
+		this.datasetClient.getDataset(request, options, callback)
 	}
 	insertDataset(
 		request:  protos.google.cloud.bigquery.v2.IInsertDatasetRequest, 
@@ -54,7 +63,16 @@ export class BigQueryClient{
         protos.google.cloud.bigquery.v2.IDataset,
         protos.google.cloud.bigquery.v2.IInsertDatasetRequest|undefined, {}|undefined
       ]>|void{
-		this.datasetClient.insertDataset(request, optionsOrCallback, callback)
+
+            let options: CallOptions;
+            if (typeof optionsOrCallback === 'function' && callback === undefined) {
+                callback = optionsOrCallback;
+                options = {};
+            }
+            else {
+                options = optionsOrCallback as CallOptions;
+            }
+		this.datasetClient.insertDataset(request, options, callback)
 	}
 	patchDataset(
 		request:  protos.google.cloud.bigquery.v2.IUpdateOrPatchDatasetRequest, 
@@ -70,7 +88,16 @@ export class BigQueryClient{
         protos.google.cloud.bigquery.v2.IDataset,
         protos.google.cloud.bigquery.v2.IUpdateOrPatchDatasetRequest|undefined, {}|undefined
       ]>|void{
-		this.datasetClient.patchDataset(request, optionsOrCallback, callback)
+
+            let options: CallOptions;
+            if (typeof optionsOrCallback === 'function' && callback === undefined) {
+                callback = optionsOrCallback;
+                options = {};
+            }
+            else {
+                options = optionsOrCallback as CallOptions;
+            }
+		this.datasetClient.patchDataset(request, options, callback)
 	}
 	updateDataset(
 		request:  protos.google.cloud.bigquery.v2.IUpdateOrPatchDatasetRequest, 
@@ -86,7 +113,16 @@ export class BigQueryClient{
         protos.google.cloud.bigquery.v2.IDataset,
         protos.google.cloud.bigquery.v2.IUpdateOrPatchDatasetRequest|undefined, {}|undefined
       ]>|void{
-		this.datasetClient.updateDataset(request, optionsOrCallback, callback)
+
+            let options: CallOptions;
+            if (typeof optionsOrCallback === 'function' && callback === undefined) {
+                callback = optionsOrCallback;
+                options = {};
+            }
+            else {
+                options = optionsOrCallback as CallOptions;
+            }
+		this.datasetClient.updateDataset(request, options, callback)
 	}
 	deleteDataset(
 		request:  protos.google.cloud.bigquery.v2.IDeleteDatasetRequest, 
@@ -102,7 +138,16 @@ export class BigQueryClient{
         protos.google.protobuf.IEmpty,
         protos.google.cloud.bigquery.v2.IDeleteDatasetRequest|undefined, {}|undefined
       ]>|void{
-		this.datasetClient.deleteDataset(request, optionsOrCallback, callback)
+
+            let options: CallOptions;
+            if (typeof optionsOrCallback === 'function' && callback === undefined) {
+                callback = optionsOrCallback;
+                options = {};
+            }
+            else {
+                options = optionsOrCallback as CallOptions;
+            }
+		this.datasetClient.deleteDataset(request, options, callback)
 	}
 	listDatasets(
 		request:  protos.google.cloud.bigquery.v2.IListDatasetsRequest, 
@@ -118,7 +163,16 @@ export class BigQueryClient{
         protos.google.cloud.bigquery.v2.IDatasetList,
         protos.google.cloud.bigquery.v2.IListDatasetsRequest|undefined, {}|undefined
       ]>|void{
-		this.datasetClient.listDatasets(request, optionsOrCallback, callback)
+
+            let options: CallOptions;
+            if (typeof optionsOrCallback === 'function' && callback === undefined) {
+                callback = optionsOrCallback;
+                options = {};
+            }
+            else {
+                options = optionsOrCallback as CallOptions;
+            }
+		this.datasetClient.listDatasets(request, options, callback)
 	}
 	undeleteDataset(
 		request:  protos.google.cloud.bigquery.v2.IUndeleteDatasetRequest, 
@@ -134,7 +188,16 @@ export class BigQueryClient{
         protos.google.cloud.bigquery.v2.IDataset,
         protos.google.cloud.bigquery.v2.IUndeleteDatasetRequest|undefined, {}|undefined
       ]>|void{
-		this.datasetClient.undeleteDataset(request, optionsOrCallback, callback)
+
+            let options: CallOptions;
+            if (typeof optionsOrCallback === 'function' && callback === undefined) {
+                callback = optionsOrCallback;
+                options = {};
+            }
+            else {
+                options = optionsOrCallback as CallOptions;
+            }
+		this.datasetClient.undeleteDataset(request, options, callback)
 	}
 	getTable(
 		request:  protos.google.cloud.bigquery.v2.IGetTableRequest, 
@@ -150,7 +213,16 @@ export class BigQueryClient{
         protos.google.cloud.bigquery.v2.ITable,
         protos.google.cloud.bigquery.v2.IGetTableRequest|undefined, {}|undefined
       ]>|void{
-		this.tableClient.getTable(request, optionsOrCallback, callback)
+
+            let options: CallOptions;
+            if (typeof optionsOrCallback === 'function' && callback === undefined) {
+                callback = optionsOrCallback;
+                options = {};
+            }
+            else {
+                options = optionsOrCallback as CallOptions;
+            }
+		this.tableClient.getTable(request, options, callback)
 	}
 	insertTable(
 		request:  protos.google.cloud.bigquery.v2.IInsertTableRequest, 
@@ -166,7 +238,16 @@ export class BigQueryClient{
         protos.google.cloud.bigquery.v2.ITable,
         protos.google.cloud.bigquery.v2.IInsertTableRequest|undefined, {}|undefined
       ]>|void{
-		this.tableClient.insertTable(request, optionsOrCallback, callback)
+
+            let options: CallOptions;
+            if (typeof optionsOrCallback === 'function' && callback === undefined) {
+                callback = optionsOrCallback;
+                options = {};
+            }
+            else {
+                options = optionsOrCallback as CallOptions;
+            }
+		this.tableClient.insertTable(request, options, callback)
 	}
 	patchTable(
 		request:  protos.google.cloud.bigquery.v2.IUpdateOrPatchTableRequest, 
@@ -182,7 +263,16 @@ export class BigQueryClient{
         protos.google.cloud.bigquery.v2.ITable,
         protos.google.cloud.bigquery.v2.IUpdateOrPatchTableRequest|undefined, {}|undefined
       ]>|void{
-		this.tableClient.patchTable(request, optionsOrCallback, callback)
+
+            let options: CallOptions;
+            if (typeof optionsOrCallback === 'function' && callback === undefined) {
+                callback = optionsOrCallback;
+                options = {};
+            }
+            else {
+                options = optionsOrCallback as CallOptions;
+            }
+		this.tableClient.patchTable(request, options, callback)
 	}
 	updateTable(
 		request:  protos.google.cloud.bigquery.v2.IUpdateOrPatchTableRequest, 
@@ -198,7 +288,16 @@ export class BigQueryClient{
         protos.google.cloud.bigquery.v2.ITable,
         protos.google.cloud.bigquery.v2.IUpdateOrPatchTableRequest|undefined, {}|undefined
       ]>|void{
-		this.tableClient.updateTable(request, optionsOrCallback, callback)
+
+            let options: CallOptions;
+            if (typeof optionsOrCallback === 'function' && callback === undefined) {
+                callback = optionsOrCallback;
+                options = {};
+            }
+            else {
+                options = optionsOrCallback as CallOptions;
+            }
+		this.tableClient.updateTable(request, options, callback)
 	}
 	deleteTable(
 		request:  protos.google.cloud.bigquery.v2.IDeleteTableRequest, 
@@ -214,7 +313,16 @@ export class BigQueryClient{
         protos.google.protobuf.IEmpty,
         protos.google.cloud.bigquery.v2.IDeleteTableRequest|undefined, {}|undefined
       ]>|void{
-		this.tableClient.deleteTable(request, optionsOrCallback, callback)
+
+            let options: CallOptions;
+            if (typeof optionsOrCallback === 'function' && callback === undefined) {
+                callback = optionsOrCallback;
+                options = {};
+            }
+            else {
+                options = optionsOrCallback as CallOptions;
+            }
+		this.tableClient.deleteTable(request, options, callback)
 	}
 	listTables(
 		request:  protos.google.cloud.bigquery.v2.IListTablesRequest, 
@@ -230,6 +338,15 @@ export class BigQueryClient{
         protos.google.cloud.bigquery.v2.ITableList,
         protos.google.cloud.bigquery.v2.IListTablesRequest|undefined, {}|undefined
       ]>|void{
-		this.tableClient.listTables(request, optionsOrCallback, callback)
+
+            let options: CallOptions;
+            if (typeof optionsOrCallback === 'function' && callback === undefined) {
+                callback = optionsOrCallback;
+                options = {};
+            }
+            else {
+                options = optionsOrCallback as CallOptions;
+            }
+		this.tableClient.listTables(request, options, callback)
 	}
 }
