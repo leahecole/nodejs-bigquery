@@ -43,10 +43,21 @@ function main(projectId) {
   // Instantiates a client
   const bigqueryClient = new JobServiceClient();
 
+  const thisQuery = `SELECT name
+      FROM \`bigquery-public-data.usa_names.usa_1910_2013\`
+      WHERE state = 'TX'
+      LIMIT 100`;
+
+
+  const queryRequest = {query: thisQuery,
+                         location: 'US', 
+                         useLegacySql: {value: false}}
+
   async function callQuery() {
     // Construct request
     const request = {
       projectId,
+      queryRequest
     };
 
     // Run request

@@ -13,7 +13,6 @@
 // limitations under the License.
 
 'use strict';
-
 function main() {
   // [START bigquery_query]
   // [START bigquery_client_default_credentials]

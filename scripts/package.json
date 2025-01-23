@@ -1,0 +1,26 @@
+{
+  "name": "nodejs-docs-scripts-bigquery",
+  "files": [
+    "*.js"
+  ],
+  "private": true,
+  "license": "Apache-2.0",
+  "author": "Google LLC",
+  "repository": "googleapis/nodejs-bigquery",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "scripts": {
+    "test": "mocha --timeout 200000",
+    "fix": "gts fix"
+  },
+  "dependencies": {
+    "@google-cloud/bigquery": "^7.9.1",
+    "typescript": "^5.7.2"
+  },
+  "devDependencies": {
+    "gts": "^5.0.0",
+    "mocha": "^8.0.0",
+    "sinon": "^18.0.0"
+  }
+}

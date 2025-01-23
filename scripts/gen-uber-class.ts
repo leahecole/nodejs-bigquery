@@ -1,11 +1,9 @@
-import { readFileSync } from "fs";
 import * as ts from "typescript";
 const fs = require('fs')
 // TODO: maintainer - if a new client is added, add it to this list
 const clients = ["DatasetServiceClient", "TableServiceClient"]
 const files = ["../src/v2/dataset_service_client.ts", "../src/v2/table_service_client.ts"]
 // TODO: automate construction of methods list
-const {DatasetServiceClient, TableServiceClient} = require("@google-cloud/bigquery")
 let output = `
 // /*!
 //  * Copyright 2024 Google LLC
