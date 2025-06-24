@@ -15,7 +15,7 @@
 'use strict';
 
 function main(datasetId = 'my_new_dataset') {
-  // [START bigquery_create_dataset]
+  // [START bigquery_create_dataset_legacy]
   // Import the Google Cloud client library and create a client
   const {BigQuery} = require('@google-cloud/bigquery');
   const bigquery = new BigQuery();
@@ -38,7 +38,7 @@ function main(datasetId = 'my_new_dataset') {
     console.log(`Dataset ${dataset.id} created.`);
   }
   createDataset();
-  // [END bigquery_create_dataset]
+  // [END bigquery_create_dataset_legacy]
 }
 
 main(...process.argv.slice(2));
