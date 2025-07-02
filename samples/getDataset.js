@@ -15,7 +15,7 @@
 'use strict';
 
 function main(datasetId = 'my_dataset') {
-  // [START bigquery_get_dataset]
+  // [START bigquery_get_dataset_legacy]
   // Import the Google Cloud client library
   const {BigQuery} = require('@google-cloud/bigquery');
   const bigquery = new BigQuery();
@@ -35,6 +35,6 @@ function main(datasetId = 'my_dataset') {
     console.log(dataset.metadata.datasetReference);
   }
   getDataset();
-  // [END bigquery_get_dataset]
+  // [END bigquery_get_dataset_legacy]
 }
 main(...process.argv.slice(2));

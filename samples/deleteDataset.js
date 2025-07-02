@@ -15,7 +15,7 @@
 'use strict';
 
 function main(datasetId = 'my_dataset') {
-  // [START bigquery_delete_dataset]
+  // [START bigquery_delete_dataset_legacy]
   // Import the Google Cloud client library
   const {BigQuery} = require('@google-cloud/bigquery');
   const bigquery = new BigQuery();
@@ -35,7 +35,7 @@ function main(datasetId = 'my_dataset') {
     await dataset.delete({force: true});
     console.log(`Dataset ${dataset.id} deleted.`);
   }
-  // [END bigquery_delete_dataset]
+  // [END bigquery_delete_dataset_legacy]
   deleteDataset();
 }
 

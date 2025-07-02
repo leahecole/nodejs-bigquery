@@ -15,7 +15,7 @@
 'use strict';
 
 function main(projectId) {
-  // [START bigquery_list_datasets]
+  // [START bigquery_list_datasets_legacy]
   // Import the Google Cloud client library
   const {BigQuery} = require('@google-cloud/bigquery');
   const bigquery = new BigQuery();
@@ -33,7 +33,7 @@ function main(projectId) {
     console.log('Datasets:');
     datasets.forEach(dataset => console.log(dataset.id));
   }
-  // [END bigquery_list_datasets]
+  // [END bigquery_list_datasets_legacy]
   listDatasets();
 }
 main(...process.argv.slice(2));
