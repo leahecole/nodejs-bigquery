@@ -15,7 +15,7 @@
 'use strict';
 
 function main(datasetId = 'my_dataset') {
-  // [START bigquery_update_dataset_description]
+  // [START bigquery_update_dataset_description_legacy]
   // Import the Google Cloud client library
   const {BigQuery} = require('@google-cloud/bigquery');
   const bigquery = new BigQuery();
@@ -36,7 +36,7 @@ function main(datasetId = 'my_dataset') {
 
     console.log(`${datasetId} description: ${newDescription}`);
   }
-  // [END bigquery_update_dataset_description]
+  // [END bigquery_update_dataset_description_legacy]
   updateDatasetDescription();
 }
 main(...process.argv.slice(2));
