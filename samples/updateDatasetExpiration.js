@@ -15,7 +15,7 @@
 'use strict';
 
 function main(datasetId = 'my_dataset') {
-  // [START bigquery_update_dataset_expiration]
+  // [START bigquery_update_dataset_expiration_legacy]
   // Import the Google Cloud client library
   const {BigQuery} = require('@google-cloud/bigquery');
   const bigquery = new BigQuery();
@@ -41,7 +41,7 @@ function main(datasetId = 'my_dataset') {
 
     console.log(`${datasetId} expiration: ${newExpirationTime}`);
   }
-  // [END bigquery_update_dataset_expiration]
+  // [END bigquery_update_dataset_expiration_legacy]
   updateDatasetExpiration();
 }
 main(...process.argv.slice(2));
