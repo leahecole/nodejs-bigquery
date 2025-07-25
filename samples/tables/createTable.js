@@ -58,8 +58,7 @@ function main(
           datasetId,
           tableId,
         },
-        schema: {fields: schema},
-        location: 'US',
+        schema: {fields: schema}
       },
     };
 
