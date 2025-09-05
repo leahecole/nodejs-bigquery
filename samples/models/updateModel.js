@@ -18,7 +18,7 @@ function main(
   projectId = 'my_project',
   datasetId = 'my_datset',
   modelId = 'my_model',
- transport = 'rest'
+  transport = 'rest',
 ) {
   // [START bigquery_update_model_description_preview]
   // Import the Google Cloud client library
@@ -38,10 +38,10 @@ function main(
 
     // known limitation: patchModel must be called in REST fallback mode
     let bigqueryClient;
-    if (transport==='grpc'){
-      bigqueryClient = new BigQueryClient()
-    }else{
-      bigqueryClient = new BigQueryClient({}, {opts: {fallback: true}})
+    if (transport === 'grpc') {
+      bigqueryClient = new BigQueryClient();
+    } else {
+      bigqueryClient = new BigQueryClient({}, {opts: {fallback: true}});
     }
 
     const request = {
@@ -59,6 +59,7 @@ function main(
     };
 
     const [model] = await bigqueryClient.patchModel(request);
+    console.log('model', model);
 
     console.log(`${modelId} description: ${model.description}`);
   }
